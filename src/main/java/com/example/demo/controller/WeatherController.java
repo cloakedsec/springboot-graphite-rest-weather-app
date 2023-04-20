@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+
 @Controller
 public class WeatherController {
     private WeatherService weatherService = new WeatherService();
@@ -15,15 +17,26 @@ public class WeatherController {
     @GetMapping("/")
     public String getWeatherForm(Model model) {
         model.addAttribute("city", "");
-        model.addAttribute("weather", null);
+        model.addAttribute("temperature","");
+        model.addAttribute("weatherResponse", null);
         return "index";
     }
 
-    @PostMapping("/")
-    public String getWeather(@RequestParam String city, Model model) {
-        Weather weather = weatherService.getWeather(city);
+    @PostMapping("/search")
+    public String getWeather(@RequestParam String city, Model model) throws IOException {
+        Weather weatherResponse = weatherService.getWeather(city);
         model.addAttribute("city", city);
-        model.addAttribute("weather", weather);
-        return "index";
+        model.addAttribute("temperature",null);
+        model.addAttribute("weatherResponse", weatherResponse);
+        return "result";
+    }
+
+    @GetMapping("/error")
+    public String handleError() {
+        return "error";
     }
 }
+
+
+
+
