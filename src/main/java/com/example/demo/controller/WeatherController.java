@@ -16,18 +16,18 @@ public class WeatherController {
 
     @GetMapping("/")
     public String getWeatherForm(Model model) {
-        model.addAttribute("city", "");
-        model.addAttribute("temperature","");
-        model.addAttribute("weatherResponse", null);
+
         return "index";
     }
 
     @PostMapping("/search")
     public String getWeather(@RequestParam String city, Model model) throws IOException {
         Weather weatherResponse = weatherService.getWeather(city);
+
         model.addAttribute("city", city);
-        model.addAttribute("temperature",null);
+        model.addAttribute("tempInCelsius1",null);
         model.addAttribute("weatherResponse", weatherResponse);
+        model.addAttribute("windSpeed", null);
         return "result";
     }
 

@@ -26,9 +26,16 @@ public class WeatherService {
         System.out.println(jsonObject);
         Weather weather = new Weather();
         weather.setCity(city);
+
         weather.setDescription(jsonObject.getJSONArray("weather").getJSONObject(0).getString("description"));
-        weather.setTemperature(jsonObject.getJSONObject("main").getDouble("temp"));
+        JSONObject windObject = jsonObject.getJSONObject("wind");
+        weather.setWindSpeed(windObject.getDouble("speed"));
+        double tempInKelvin = jsonObject.getJSONObject("main").getDouble("temp");
+        double tempInCelsius = tempInKelvin - 273.15;
+
+        weather.setTemperature((int) Math.floor(tempInCelsius));
         weather.setHumidity(jsonObject.getJSONObject("main").getDouble("humidity"));
+//        weather.setTemperature(jsonObject.getJSONObject("main").getDouble("temp"));
 
         return weather;
     }
