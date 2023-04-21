@@ -34,10 +34,33 @@
     </div>
 </nav>
 
-<div class="container">
-    <h1>Weather Results for <span th:text="${weatherResponse.city}"></span></h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
 
-    <table>
+<body th:inline="javascript">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Weather App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Current Weather</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">5-Day Forecast</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h1>Weather Results for <span th:text="${weatherResponse.city}"></span></h1>
+    <table class="table">
         <tr>
             <th>Temperature</th>
             <td><span th:text="${weatherResponse.temperature}"></span> °C</td>
@@ -52,10 +75,49 @@
         </tr>
         <tr>
             <th>Wind Speed</th>
-            <td><span th:text="${weatherResponse.windSpeed}"></span></td>
+            <td><span th:text="${weatherResponse.windSpeed}"></span> mph</td>
         </tr>
-    </table>
-</div>
+        <tr>
+            <th>Visibility</th>
+            <td><span th:text="${weatherResponse.visibility}"></span> m</td>
+        </tr>
+        <tr>
+            <th>Timezone</th>
+            <td><span th:text="${weatherResponse.timezone}"></span></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td><span th:text="${weatherResponse.country}"></span></td>
+        </tr>
+        <tr>
+            <th>Sunrise</th>
+            <td><span th:text="${weatherResponse.sunrise}"></span></td>
+        </tr>
+        <tr>
+            <th>Sunset</th>
+            <td><span th:text="${weatherResponse.sunset}"></span></td>
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            <td><span th:text="${weatherResponse.longitude}"></span></td>
+        </tr>
+        <tr>
+            <th>Latitude</th>
+            <td><span th:text="${weatherResponse.latitude}"></span></td>
+        </tr>
+        <tr>
+            <th>Cloudiness</th>
+            <td><span th:text="${weatherResponse.cloudiness}"></span> %</td>
+        </tr>
+        <tr>
+            <th>Pressure</th>
+            <td><span th:text="${weatherResponse.pressure}"></span> hPa</td>
+        </tr>
+        <tr>
+            <th>Feels Like</th>
+            <td><span th:text="${weatherResponse.feelsLike}"></span> °C</td>
+        </tr>
+
 
 </body>
 </html>
