@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class WeatherController {
     private WeatherService weatherService = new WeatherService();
 
-    @GetMapping("/")
+    @GetMapping("/weather")
     public String getWeatherForm(Model model) {
 
         return "index";
@@ -24,37 +26,55 @@ public class WeatherController {
     public String getWeather(@RequestParam String city, Model model) throws IOException {
         Weather weatherResponse = weatherService.getWeather(city);
 
-        model.addAttribute("city", weatherResponse.getCity());
-        model.addAttribute("tempInCelsius1", weatherResponse.getTemperature());
-        model.addAttribute("weatherResponse", weatherResponse);
-        model.addAttribute("windSpeed", weatherResponse.getWindSpeed());
-        model.addAttribute("visibility", weatherResponse.getVisibility());
-        model.addAttribute("timezone", weatherResponse.getTimezone());
-        model.addAttribute("country", weatherResponse.getCountry());
-        model.addAttribute("sunrise", weatherResponse.getSunrise());
-        model.addAttribute("sunset", weatherResponse.getSunset());
-        model.addAttribute("longitude", weatherResponse.getLongitude());
-        model.addAttribute("latitude", weatherResponse.getLatitude());
-        model.addAttribute("cloudiness", weatherResponse.getCloudiness());
-        model.addAttribute("pressure", weatherResponse.getPressure());
-        model.addAttribute("feelsLike", weatherResponse.getFeelsLike());
-        model.addAttribute("maxTemperature", weatherResponse.getMaxTemperature());
-        model.addAttribute("minTemperature", weatherResponse.getMinTemperature());
-        model.addAttribute("weatherIcon", weatherResponse.getWeatherIcon());
-        model.addAttribute("weatherId", weatherResponse.getWeatherId());
-        model.addAttribute("cityId", weatherResponse.getCityId());
-        model.addAttribute("base", weatherResponse.getBase());
-        model.addAttribute("dt", weatherResponse.getDt());
-        model.addAttribute("cod", weatherResponse.getCod());
+        Map<String, Object> weatherAttributes = new HashMap<>();
+        weatherAttributes.put("city", weatherResponse.getCity());
+        weatherAttributes.put("tempInCelsius1", weatherResponse.getTemperature());
+        weatherAttributes.put("weatherResponse", weatherResponse);
+        weatherAttributes.put("windSpeed", weatherResponse.getWindSpeed());
+        weatherAttributes.put("visibility", weatherResponse.getVisibility());
+        weatherAttributes.put("timezone", weatherResponse.getTimezone());
+        weatherAttributes.put("country", weatherResponse.getCountry());
+        weatherAttributes.put("sunrise", weatherResponse.getSunrise());
+        weatherAttributes.put("sunset", weatherResponse.getSunset());
+        weatherAttributes.put("longitude", weatherResponse.getLongitude());
+        weatherAttributes.put("latitude", weatherResponse.getLatitude());
+        weatherAttributes.put("cloudiness", weatherResponse.getCloudiness());
+        weatherAttributes.put("pressure", weatherResponse.getPressure());
+        weatherAttributes.put("feelsLike", weatherResponse.getFeelsLike());
+        weatherAttributes.put("maxTemperature", weatherResponse.getMaxTemperature());
+        weatherAttributes.put("minTemperature", weatherResponse.getMinTemperature());
+        weatherAttributes.put("weatherIcon", weatherResponse.getWeatherIcon());
+        weatherAttributes.put("weatherId", weatherResponse.getWeatherId());
+        weatherAttributes.put("cityId", weatherResponse.getCityId());
+        weatherAttributes.put("base", weatherResponse.getBase());
+        weatherAttributes.put("dt", weatherResponse.getDt());
+        weatherAttributes.put("cod", weatherResponse.getCod());
 
+        model.addAllAttributes(weatherAttributes);
         return "result";
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam("city") String city, Model model) throws IOException {
+        Weather weatherResponse = weatherService.getWeather(city);
+        if (weatherResponse == null) {
+            model.addAttribute("error", "Error retrieving weather information");
+            return "error";
+        }
+            if (city == "" || city == null)
+                return "error";
+            model.addAttribute("weather", weatherResponse);
+            return "result";
+        }
 
-    @GetMapping("/error")
-    public String handleError() {
-        return "error";
+    @GetMapping("/about")
+    public String getAbout(){
+        return "about";
     }
+
+
+
+
 }
 
 

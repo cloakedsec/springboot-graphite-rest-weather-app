@@ -9,15 +9,6 @@
 </head>
 <body th:inline="javascript">
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Weather App</a>
-
-    <!-- Toggler/collapsible Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
     <!-- Navbar links -->
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
@@ -34,90 +25,117 @@
     </div>
 </nav>
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Weather Results</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
+    <section class="vh-100" style="background-color: #4B515D;">
+        <div class="container py-5 h-100">
 
-<body th:inline="javascript">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Weather App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Current Weather</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">5-Day Forecast</a>
-            </li>
-        </ul>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-8 col-lg-6 col-xl-4">
+
+                    <div class="card" style="color: #4B515D; border-radius: 35px;">
+                        <div class="card-body p-4">
+
+                            <div class="d-flex">
+                                <h6 class="flex-grow-1"><tr>
+
+                                    <td><span th:text="${weatherResponse.city}"></span></td>
+                                </tr></h6>
+                                <h6>15:07</h6>
+                            </div>
+
+                            <div class="d-flex flex-column text-center mt-5 mb-4">
+                                <h6 class="display-4 mb-0 font-weight-bold" style="color: #1C2331;"> <h6 class="flex-grow-1"><tr>
+
+                                    <td><span th:text="${weatherResponse.temperature}"></span></td>
+                                </tr></h6> </h6>
+                                <span class="small" style="color: #868B94">Stormy</span>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1" style="font-size: 1rem;">
+                                    <div><i class="fas fa-wind fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 40 km/h
+                  </span></div>
+                                    <div><i class="fas fa-tint fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 84% </span>
+                                    </div>
+                                    <div><i class="fas fa-sun fa-fw" style="color: #868B94;"></i> <span class="ms-1"> 0.2h </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+                                         width="100px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="padding-top:50px">
+
+        <div style="text-align:center;">
+            <h1>Weather Application</h1>
+            <form id="weather-form" action="/search" method="post">
+                <input type="text" name="city" placeholder="Enter city name">
+                <button type="submit">Get Weather</button>
+            </form>
+        </div>
     </div>
-</nav>
-<div class="container mt-4">
-    <h1>Weather Results for <span th:text="${weatherResponse.city}"></span></h1>
-    <table class="table">
-        <tr>
-            <th>Temperature</th>
-            <td><span th:text="${weatherResponse.temperature}"></span> °C</td>
-        </tr>
-        <tr>
-            <th>Humidity</th>
-            <td><span th:text="${weatherResponse.humidity}"></span> %</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td><span th:text="${weatherResponse.description}"></span></td>
-        </tr>
-        <tr>
-            <th>Wind Speed</th>
-            <td><span th:text="${weatherResponse.windSpeed}"></span> mph</td>
-        </tr>
-        <tr>
-            <th>Visibility</th>
-            <td><span th:text="${weatherResponse.visibility}"></span> m</td>
-        </tr>
-        <tr>
-            <th>Timezone</th>
-            <td><span th:text="${weatherResponse.timezone}"></span></td>
-        </tr>
-        <tr>
-            <th>Country</th>
-            <td><span th:text="${weatherResponse.country}"></span></td>
-        </tr>
-        <tr>
-            <th>Sunrise</th>
-            <td><span th:text="${weatherResponse.sunrise}"></span></td>
-        </tr>
-        <tr>
-            <th>Sunset</th>
-            <td><span th:text="${weatherResponse.sunset}"></span></td>
-        </tr>
-        <tr>
-            <th>Longitude</th>
-            <td><span th:text="${weatherResponse.longitude}"></span></td>
-        </tr>
-        <tr>
-            <th>Latitude</th>
-            <td><span th:text="${weatherResponse.latitude}"></span></td>
-        </tr>
-        <tr>
-            <th>Cloudiness</th>
-            <td><span th:text="${weatherResponse.cloudiness}"></span> %</td>
-        </tr>
-        <tr>
-            <th>Pressure</th>
-            <td><span th:text="${weatherResponse.pressure}"></span> hPa</td>
-        </tr>
-        <tr>
-            <th>Feels Like</th>
-            <td><span th:text="${weatherResponse.feelsLike}"></span> °C</td>
-        </tr>
 
+    <div th:if="${weatherResponse == null}">
+        <p>Sorry, there was an error processing your request. Please try again later.</p>
+    </div>
+    <div th:if="${weatherResponse != null}">
+        <!-- display weather data -->
+
+
+
+        <div class="container mt-4">
+            <h1>Weather Results for <span th:text="${weatherResponse.city}"></span></h1>
+            <div id="results">
+                <table class="table">
+                    <tr>
+                        <th>Temperature</th>
+                        <td><span th:text="${weatherResponse.temperature}"></span> °C</td>
+                    </tr>
+                    <tr>
+                        <th>Humidity</th>
+                        <td><span th:text="${weatherResponse.humidity}"></span> %</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td><span th:text="${weatherResponse.description}"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Wind Speed</th>
+                        <td><span th:text="${weatherResponse.windSpeed}"></span> mph</td>
+                    </tr>
+                    <tr>
+                        <th>Visibility</th>
+                        <td><span th:text="${weatherResponse.visibility}"></span> m</td>
+                    </tr>
+                    <tr>
+                        <th>Timezone</th>
+                        <td><span th:text="${weatherResponse.timezone}"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Country</th>
+                        <td><span th:text="${weatherResponse.country}"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Sunrise</th>
+                        <td><span th:text="${weatherResponse.sunrise}"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Sunset</th>
+                        <td><span th:text="${weatherResponse.sunset}"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Longitude</th>
+                        <td><span th:text="${weatherResponse.longitude}"></span></td>
+                    </tr>
+                </table>
+    </div>
 
 </body>
 </html>

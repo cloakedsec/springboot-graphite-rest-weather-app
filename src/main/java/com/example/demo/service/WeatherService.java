@@ -4,10 +4,11 @@ import com.example.demo.model.Weather;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-
+@Service
 public class WeatherService {
 
 
@@ -62,18 +63,6 @@ public class WeatherService {
         weather.setBase(jsonObject.getString("base"));
         weather.setDt(jsonObject.getLong("dt"));
         weather.setCod(jsonObject.getInt("cod"));
-
-//        weather.setCity(city);
-//
-//        weather.setDescription(jsonObject.getJSONArray("weather").getJSONObject(0).getString("description"));
-//        JSONObject windObject = jsonObject.getJSONObject("wind");
-//        weather.setWindSpeed(windObject.getDouble("speed"));
-//        double tempInKelvin = jsonObject.getJSONObject("main").getDouble("temp");
-//        double tempInCelsius = tempInKelvin - 273.15;
-//
-//        weather.setTemperature((int) Math.floor(tempInCelsius));
-//        weather.setHumidity(jsonObject.getJSONObject("main").getDouble("humidity"));
-
 
         return weather;
     }

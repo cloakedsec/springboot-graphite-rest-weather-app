@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Weather Application</title>
+    <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -9,38 +10,45 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Weather App</a>
-    <!-- Toggler/collapsible Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Current Weather</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Forecast</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div class="main-container">
 
-<div style="text-align:center;">
-    <h1>Weather Application</h1>
-    <form id="weather-form" action="/search" method="post">
-        <input type="text" name="city" placeholder="Enter city name">
-        <button type="submit">Get Weather</button>
-    </form>
-</div>
+    <!-- HEADER -->
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+                <h3 class="mb-4 pb-2 fw-normal">Check the weather forecast</h3>
+                <div class="input-group rounded mb-3">
+                    <form id="weather-form" action="/search" method="post" class="input-group">
+                        <input class="form-control rounded" type="text" name="city" placeholder="Enter city name">
+                        <button type="submit" class="btn btn-primary">Get Weather</button>
+                    </form>
+                </div>
+
+
+                <div class="card shadow-0 border">
+                    <div class="card-body p-4">
+                        <h4 class="mb-1 sfw-normal">New York, US</h4>
+                        <p class="mb-2">Current temperature: <strong>5.42°C</strong></p>
+                        <p>Feels like: <strong>4.37°C</strong></p>
+                        <p>Max: <strong>6.11°C</strong>, Min: <strong>3.89°C</strong></p>
+
+                        <div class="d-flex flex-row align-items-center">
+                            <p class="mb-0 me-4">Scattered Clouds</p>
+                            <i class="fas fa-cloud fa-3x" style="color: #eee;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="script.js"></script>
+<script src="src/main/resources/templates/script.js"></script>
+</div>
 </body>
 </html>
