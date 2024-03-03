@@ -1,0 +1,45 @@
+= Weather App
+
+== Overview
+This project is a simple weather application that displays weather information for a given city. It fetches weather data from an API and presents it in a visually appealing manner.
+
+== Features
+
+Retrieves weather data from an API
+Displays current temperature, weather description, wind speed, humidity, and visibility
+Allows users to search for weather information for different cities
+Shows search history and favorite cities
+== Technologies Used
+
+HTML
+CSS (Bootstrap)
+JavaScript (jQuery)
+Thymeleaf (for server-side templating)
+Spring Boot (for backend functionality)
+External weather API (for fetching weather data)
+== Setup
+
+Clone the repository to your local machine.
+Navigate to the project directory.
+Build and run the project using Maven: mvn spring-boot:run.
+Access the application in your web browser at http://localhost:8080.
+== Usage
+
+Enter the name of the city for which you want to check the weather in the search box.
+Click the "Get Weather" button.
+View the weather information displayed on the screen.
+Optionally, view search history and favorite cities.
+== Future Improvements
+
+Implement caching for better performance.
+Add support for displaying weather forecasts.
+Improve the user interface for better usability.
+Implement user authentication and user-specific features.
+Allow users to customize units (e.g., temperature in Celsius or Fahrenheit).
+== Contributors
+
+Ahmad Faraz
+faraz.ahmad@live.in
+
+== License
+This project is licensed under the MIT License.
